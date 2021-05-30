@@ -1,11 +1,27 @@
 package com.teenwolf3301.to_do_list
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.teenwolf3301.to_do_list.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var mBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
+        val view = mBinding.root
+        setContentView(view)
+
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frame_container)
+
+        if (currentFragment == null) {
+            val fragment = ListFragment()
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.frame_container, fragment)
+                .commit()
+        }
     }
 }
