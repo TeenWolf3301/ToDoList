@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
+import java.text.DateFormat
 
 class ListFragment : Fragment() {
 
@@ -24,6 +25,8 @@ class ListFragment : Fragment() {
         _binding = FragmentListBinding.inflate(layoutInflater, container, false)
 
         listRecyclerView = binding.rvList
+        binding.tvDate.text = DateFormat.getDateInstance().format(System.currentTimeMillis())
+        binding.tvStats.text = "5 incomplete, 5 completed"
 
         return binding.root
     }

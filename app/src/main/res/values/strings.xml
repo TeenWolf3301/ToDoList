@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">To-Do-List</string>
     <string name="fab_content_desc">Add new item</string>
+
+
+    <string-array name="priority">
+        <item>HIGH</item>
+        <item>MEDIUM</item>
+        <item>LOW</item>
+    </string-array>
 </resources>

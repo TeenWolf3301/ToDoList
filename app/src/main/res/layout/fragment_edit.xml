@@ -13,48 +13,64 @@
         android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Task name"
             android:textColor="?android:textColorPrimary"
-            android:textSize="32sp"
-            tools:text="March 9, 2020" />
+            android:textSize="32dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/google_red"
+                android:padding="8dp"
+                android:text="HIGH"
+                android:textColor="@color/google_red" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/google_yellow"
+                android:padding="8dp"
+                android:text="MEDIUM"
+                android:textColor="@color/google_yellow" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/google_green"
+                android:padding="8dp"
+                android:text="LOW"
+                android:textColor="@color/google_green" />
+        </RadioGroup>
 
         <TextView
-            android:id="@+id/tv_stats"
+            android:id="@+id/tv_date_created"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@color/scarpa_flow"
             android:textSize="14sp"
-            tools:text="5 incomplete, 5 completed" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:background="#33D0D0D0" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            tools:listitem="@layout/list_item" />
+            tools:text="Created: March 9, 2020" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_item"
+        android:id="@+id/fab_apply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:backgroundTint="@color/purple_700"
         android:contentDescription="@string/fab_content_desc"
-        android:src="@drawable/ic_add_item"
+        android:src="@drawable/ic_checkmark"
         app:backgroundTint="@color/purple_500"
         app:borderWidth="2dp"
         app:tint="@color/white" />

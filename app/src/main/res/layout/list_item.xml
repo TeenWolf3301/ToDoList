@@ -55,7 +55,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_priority"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/google_green"
         app:layout_constraintBottom_toBottomOf="@+id/cb_completed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cb_completed" />

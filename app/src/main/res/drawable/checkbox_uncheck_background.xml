@@ -16,7 +16,7 @@
     <item>
         <shape>
             <gradient
-                android:endColor="#F8F8F8"
+                android:endColor="@color/alabaster"
                 android:gradientRadius="180"
                 android:startColor="#FCFCFC" />
             <corners android:radius="6dp" />

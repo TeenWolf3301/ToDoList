@@ -13,15 +13,17 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = mBinding.root
         setContentView(view)
+        APP_ACTIVITY = this
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.frame_container)
 
         if (currentFragment == null) {
-            val fragment = ListFragment()
+            val fragment = EditFragment()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.frame_container, fragment)
                 .commit()
         }
+
     }
 }
