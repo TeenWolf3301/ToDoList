@@ -13,6 +13,15 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/alabaster</item>
-        <item name="android:textColorPrimary">@color/alto_dark</item>
+
+        <item name="android:textColorPrimary">@color/woodsmoke_dark</item>
+        <item name="android:textColorPrimaryInverse">@color/alto</item>
+
+        <item name="android:textColorSecondary">@color/french_grey</item>
+
+        <item name="android:textColorTertiary">@color/scarpa_flow</item>
+
+        <item name="customColorValue">@color/alabaster_darker</item>
+        <item name="customColorDrawableValue">@color/alabaster</item>
     </style>
 </resources>

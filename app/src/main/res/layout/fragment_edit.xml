@@ -19,7 +19,22 @@
             android:layout_height="wrap_content"
             android:hint="Task name"
             android:textColor="?android:textColorPrimary"
-            android:textSize="32dp" />
+            android:textSize="24dp"
+            android:inputType="text"/>
+
+        <TextView
+            android:text="Category:"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="?android:textColorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/category"
+            android:spinnerMode="dialog"/>
 
         <RadioGroup
             android:layout_width="match_parent"

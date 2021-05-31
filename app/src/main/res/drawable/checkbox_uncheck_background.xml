@@ -6,7 +6,7 @@
                 android:left="2dp"
                 android:right="2dp"
                 android:top="2dp" />
-            <solid android:color="@color/alto" />
+            <solid android:color="?android:textColorPrimaryInverse" />
             <corners android:radius="6dp" />
             <size
                 android:width="24dp"
@@ -16,9 +16,9 @@
     <item>
         <shape>
             <gradient
-                android:endColor="@color/alabaster"
+                android:endColor="?customColorDrawableValue"
                 android:gradientRadius="180"
-                android:startColor="#FCFCFC" />
+                android:startColor="?customColorValue" />
             <corners android:radius="6dp" />
             <size
                 android:width="24dp"

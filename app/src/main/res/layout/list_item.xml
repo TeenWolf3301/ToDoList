@@ -30,7 +30,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:textColor="@color/scarpa_flow"
+        android:textColor="?android:textColorTertiary"
         android:textSize="18sp"
         tools:text="Task" />
 
@@ -47,7 +47,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:textColor="#B9B9BE"
+        android:textColor="?android:textColorSecondary"
         android:textSize="14sp"
         app:drawableStartCompat="@drawable/ic_checkmark"
         tools:text="Category" />

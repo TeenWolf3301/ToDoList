@@ -3,9 +3,10 @@
     <string name="fab_content_desc">Add new item</string>
 
 
-    <string-array name="priority">
-        <item>HIGH</item>
-        <item>MEDIUM</item>
-        <item>LOW</item>
+    <string-array name="category">
+        <item>Finance</item>
+        <item>Wedding</item>
+        <item>Freelance</item>
+        <item>Shopping list</item>
     </string-array>
 </resources>

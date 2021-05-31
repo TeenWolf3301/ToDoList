@@ -13,11 +13,15 @@
 
     <color name="woodsmoke">#141419</color>
     <color name="alabaster">#F8F8F8</color>
+    <color name="alabaster_darker">#FCFCFC</color>
 
     <color name="alto">#DADADA</color>
-    <color name="alto_dark">#0E0E11</color>
+    <color name="french_grey">#B9B9BE</color>
+    <color name="woodsmoke_dark">#0E0E11</color>
 
     <color name="scarpa_flow">#575767</color>
+    <color name="charade">#2B2D37</color>
+    <color name="charade_darker">#262933</color>
 
     <color name="google_red">#DB4437</color>
     <color name="google_yellow">#F4B400</color>
