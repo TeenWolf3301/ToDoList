@@ -6,7 +6,7 @@
                 android:left="2dp"
                 android:right="2dp"
                 android:top="2dp" />
-            <solid android:color="#DADADA" />
+            <solid android:color="@color/alto" />
             <corners android:radius="6dp" />
             <size
                 android:width="24dp"

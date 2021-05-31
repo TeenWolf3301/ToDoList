@@ -1,9 +1,12 @@
-package com.teenwolf3301.to_do_list
+package com.teenwolf3301.to_do_list.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.teenwolf3301.to_do_list.APP_ACTIVITY
 import com.teenwolf3301.to_do_list.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
@@ -14,16 +17,5 @@ class MainActivity : AppCompatActivity() {
         val view = mBinding.root
         setContentView(view)
         APP_ACTIVITY = this
-
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.frame_container)
-
-        if (currentFragment == null) {
-            val fragment = EditFragment()
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.frame_container, fragment)
-                .commit()
-        }
-
     }
 }

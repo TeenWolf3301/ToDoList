@@ -6,14 +6,15 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.text.DateFormat
 
-@Entity
+@Entity(tableName = "table_todo")
 @Parcelize
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val name: String,
+    val category: String = "Finance",
     val isCompleted: Boolean = false,
-    val priority: Priority,
+    val priority: Priority = Priority.LOW,
     val date: Long = System.currentTimeMillis()
 ) : Parcelable {
     val formattedDate: String
