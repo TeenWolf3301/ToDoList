@@ -25,6 +25,15 @@ abstract class TaskDatabase : RoomDatabase() {
 
             appScope.launch {
                 dao.insertTask(Task(name = "First"))
+                dao.insertTask(Task(name = "Second", isCompleted = true))
+                dao.insertTask(Task(name = "Third"))
+                dao.insertTask(Task(name = "Fourth"))
+                dao.insertTask(Task(name = "Fifth"))
+                dao.insertTask(Task(name = "Sixth"))
+                dao.insertTask(Task(name = "Seventh"))
+                dao.insertTask(Task(name = "Eighth"))
+                dao.insertTask(Task(name = "Ninth"))
+                dao.insertTask(Task(name = "Tenth"))
             }
         }
     }

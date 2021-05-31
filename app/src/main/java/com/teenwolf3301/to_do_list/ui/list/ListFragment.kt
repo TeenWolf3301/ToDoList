@@ -7,12 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teenwolf3301.to_do_list.R
+import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.DateFormat
 
 @AndroidEntryPoint
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickListener {
 
     private lateinit var listRecyclerView: RecyclerView
 
@@ -23,7 +24,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
         val binding = FragmentListBinding.bind(view)
 
-        val listAdapter = ListAdapter()
+        val listAdapter = ListAdapter(this)
 
         listRecyclerView = binding.rvList
         binding.apply {
@@ -37,8 +38,16 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             }
         }
 
-        viewModel.list.observe(viewLifecycleOwner) {
-            listAdapter.submitList(it)
+        viewModel.list.observe(viewLifecycleOwner) { list ->
+            listAdapter.submitList(list.sortedBy { it.isCompleted })
         }
+    }
+
+    override fun onItemClick(task: Task) {
+        viewModel.onTaskSelected(task)
+    }
+
+    override fun onCheckBoxClick(task: Task, isChecked: Boolean) {
+        viewModel.onTaskCheckedChanged(task, isChecked)
     }
 }

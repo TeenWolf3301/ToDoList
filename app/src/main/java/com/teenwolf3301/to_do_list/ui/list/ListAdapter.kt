@@ -13,11 +13,30 @@ import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.ListItemBinding
 import com.teenwolf3301.to_do_list.ui.list.ListAdapter.TaskViewHolder
 
-class ListAdapter :
+class ListAdapter(private val listener: OnItemClickListener) :
     ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
 
-    class TaskViewHolder(private val binding: ListItemBinding) :
+    inner class TaskViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val task = getItem(position)
+                        listener.onItemClick(task)
+                    }
+                }
+                cbCompleted.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val task = getItem(position)
+                        listener.onCheckBoxClick(task, cbCompleted.isChecked)
+                    }
+                }
+            }
+        }
 
         fun bind(task: Task) {
             binding.apply {
@@ -34,6 +53,11 @@ class ListAdapter :
                 }
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(task: Task)
+        fun onCheckBoxClick(task: Task, isChecked: Boolean)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Task>() {
