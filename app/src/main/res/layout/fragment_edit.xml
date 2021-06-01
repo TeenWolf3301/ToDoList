@@ -8,13 +8,14 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="32dp"
+        android:paddingBottom="16dp"
         android:orientation="vertical">
 
         <EditText
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Task name"
@@ -24,6 +25,8 @@
 
         <TextView
             android:text="Category:"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:textColor="?android:textColorPrimary"
@@ -32,6 +35,8 @@
 
         <Spinner
             android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_height="wrap_content"
             android:entries="@array/category"
             android:spinnerMode="dialog"/>
@@ -39,6 +44,8 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
@@ -69,6 +76,8 @@
 
         <TextView
             android:id="@+id/tv_date_created"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -84,10 +93,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/purple_700"
+        android:backgroundTint="@color/chambray"
         android:contentDescription="@string/fab_content_desc"
         android:src="@drawable/ic_checkmark"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="@color/indigo"
         app:borderWidth="2dp"
         app:tint="@color/white" />
 

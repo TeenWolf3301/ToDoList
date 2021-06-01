@@ -24,16 +24,16 @@ abstract class TaskDatabase : RoomDatabase() {
             val dao = database.get().taskDao()
 
             appScope.launch {
-                dao.insertTask(Task(name = "First"))
-                dao.insertTask(Task(name = "Second", isCompleted = true))
-                dao.insertTask(Task(name = "Third"))
-                dao.insertTask(Task(name = "Fourth"))
-                dao.insertTask(Task(name = "Fifth"))
-                dao.insertTask(Task(name = "Sixth"))
-                dao.insertTask(Task(name = "Seventh"))
+                dao.insertTask(Task(name = "First", category = "Freelance"))
+                dao.insertTask(Task(name = "Second", isCompleted = true, category = "Wedding"))
+                dao.insertTask(Task(name = "Third", priority = Priority.MEDIUM))
+                dao.insertTask(Task(name = "Fourth", priority = Priority.MEDIUM))
+                dao.insertTask(Task(name = "Fifth", priority = Priority.HIGH, category = "Wedding"))
+                dao.insertTask(Task(name = "Sixth", isCompleted = true))
+                dao.insertTask(Task(name = "Seventh", isCompleted = true, priority = Priority.HIGH, category = "Shopping list"))
                 dao.insertTask(Task(name = "Eighth"))
                 dao.insertTask(Task(name = "Ninth"))
-                dao.insertTask(Task(name = "Tenth"))
+                dao.insertTask(Task(name = "Tenth", category = "Shopping list"))
             }
         }
     }

@@ -9,15 +9,15 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:paddingTop="32dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:textColor="?android:textColorPrimary"
             android:textSize="32sp"
             tools:text="March 9, 2020" />
@@ -26,6 +26,8 @@
             android:id="@+id/tv_stats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/scarpa_flow"
             android:textSize="14sp"
@@ -34,6 +36,8 @@
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_height="2dp"
             android:layout_marginTop="16dp"
             android:background="#33D0D0D0" />
@@ -53,10 +57,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/purple_700"
+        android:backgroundTint="@color/chambray"
         android:contentDescription="@string/fab_content_desc"
         android:src="@drawable/ic_add_item"
-        app:backgroundTint="@color/purple_500"
+        app:backgroundTint="@color/indigo"
         app:borderWidth="2dp"
         app:tint="@color/white" />
 

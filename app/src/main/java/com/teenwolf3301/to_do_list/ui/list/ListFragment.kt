@@ -1,7 +1,10 @@
 package com.teenwolf3301.to_do_list.ui.list
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,13 +26,11 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentListBinding.bind(view)
-
         val listAdapter = ListAdapter(this)
 
         listRecyclerView = binding.rvList
         binding.apply {
             tvDate.text = DateFormat.getDateInstance().format(System.currentTimeMillis())
-            tvStats.text = "5 incomplete, 5 completed"
 
             listRecyclerView.apply {
                 adapter = listAdapter
@@ -39,8 +40,28 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         }
 
         viewModel.list.observe(viewLifecycleOwner) { list ->
-            listAdapter.submitList(list.sortedBy { it.isCompleted })
+            listAdapter.submitList(list)
+            binding.tvStats.text =
+                "${list.size - viewModel.completedTasks()} incomplete, ${viewModel.completedTasks()} completed"
         }
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.list_menu, menu)
+
+        val searchItem = menu.findItem(R.id.list_menu_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?) = true
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchQuery.value = newText.orEmpty()
+                return true
+            }
+        })
     }
 
     override fun onItemClick(task: Task) {
