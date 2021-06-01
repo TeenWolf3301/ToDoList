@@ -2,8 +2,8 @@ package com.teenwolf3301.to_do_list.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.teenwolf3301.to_do_list.util.APP_ACTIVITY
 import com.teenwolf3301.to_do_list.databinding.ActivityMainBinding
+import com.teenwolf3301.to_do_list.util.APP_ACTIVITY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

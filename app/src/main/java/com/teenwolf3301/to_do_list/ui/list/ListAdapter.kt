@@ -1,7 +1,5 @@
 package com.teenwolf3301.to_do_list.ui.list
 
-import android.R.attr
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +7,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.teenwolf3301.to_do_list.util.APP_ACTIVITY
 import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.ListItemBinding
 import com.teenwolf3301.to_do_list.ui.list.ListAdapter.TaskViewHolder
+import com.teenwolf3301.to_do_list.util.APP_ACTIVITY
+import com.teenwolf3301.to_do_list.util.getTextColorSecondary
+import com.teenwolf3301.to_do_list.util.getTextColorTertiary
 
 class ListAdapter(private val listener: OnItemClickListener) :
     ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
@@ -42,7 +42,6 @@ class ListAdapter(private val listener: OnItemClickListener) :
         }
 
         fun bind(task: Task) {
-            val typedValue = TypedValue()
             binding.apply {
                 tvItemName.text = task.name
                 cbCompleted.isChecked = task.isCompleted
@@ -56,13 +55,11 @@ class ListAdapter(private val listener: OnItemClickListener) :
                         ContextCompat.getColorStateList(APP_ACTIVITY, R.color.google_red)
                 }
                 if (cbCompleted.isChecked) {
-                    APP_ACTIVITY.theme.resolveAttribute(attr.textColorSecondary, typedValue, true)
-                    tvItemName.setTextColor(typedValue.data)
+                    tvItemName.setTextColor(getTextColorSecondary())
                     tvItemCategory.visibility = View.GONE
                     icPriority.visibility = View.INVISIBLE
                 } else {
-                    APP_ACTIVITY.theme.resolveAttribute(attr.textColorTertiary, typedValue, true)
-                    tvItemName.setTextColor(typedValue.data)
+                    tvItemName.setTextColor(getTextColorTertiary())
                     tvItemCategory.visibility = View.VISIBLE
                     icPriority.visibility = View.VISIBLE
                 }

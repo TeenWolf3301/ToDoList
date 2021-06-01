@@ -31,7 +31,7 @@
         android:gravity="center_vertical"
         android:maxLines="1"
         android:textColor="?android:textColorTertiary"
-        android:textSize="18sp"
+        android:textSize="@dimen/default_text"
         tools:text="Task" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:gravity="center_vertical"
         android:maxLines="1"
         android:textColor="?android:textColorSecondary"
-        android:textSize="14sp"
+        android:textSize="@dimen/small_text"
         app:drawableStartCompat="@drawable/ic_checkmark"
         tools:text="Category" />
 

@@ -42,7 +42,7 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         viewModel.list.observe(viewLifecycleOwner) { list ->
             listAdapter.submitList(list)
             binding.tvStats.text =
-                "${list.size - viewModel.completedTasks()} incomplete, ${viewModel.completedTasks()} completed"
+                "${list.size - viewModel.completedTasks()} uncomplete, ${viewModel.completedTasks()} completed"
         }
 
         setHasOptionsMenu(true)
