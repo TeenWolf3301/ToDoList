@@ -7,12 +7,15 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
+import com.teenwolf3301.to_do_list.util.removeItemDecorations
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 
 @AndroidEntryPoint
@@ -40,12 +43,29 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         }
 
         viewModel.list.observe(viewLifecycleOwner) { list ->
-            listAdapter.submitList(list)
-            binding.tvStats.text =
-                "${list.size - viewModel.completedTasks()} uncomplete, ${viewModel.completedTasks()} completed"
+            listAdapter.submitList(list) {
+                lifecycleScope.launch {
+                    listRecyclerView.scrollToPosition(0)
+                    listRecyclerView.removeItemDecorations()
+                    addDecorationCompleted(listAdapter.currentList)
+                    addDecorationUncompleted(listAdapter.currentList)
+                    binding.tvStats.text =
+                        "${list.size - viewModel.completedTasks()} uncomplete, ${viewModel.completedTasks()} completed"
+                }
+            }
         }
 
         setHasOptionsMenu(true)
+    }
+
+    private fun addDecorationCompleted(list: List<Task>) {
+        val firstCompleted = list.indexOf(list.firstOrNull { it.isCompleted })
+        listRecyclerView.addItemDecoration(ListHeader(firstCompleted, "Completed"))
+    }
+
+    private fun addDecorationUncompleted(list: List<Task>) {
+        val firstUncompleted = list.indexOf(list.firstOrNull { !it.isCompleted })
+        listRecyclerView.addItemDecoration(ListHeader(firstUncompleted, "Uncompleted"))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

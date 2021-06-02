@@ -9,44 +9,44 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingTop="32dp"
-        android:paddingBottom="16dp"
-        android:orientation="vertical">
+        android:paddingBottom="16dp">
 
         <EditText
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:hint="Task name"
+            android:inputType="text"
             android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/big_text"
-            android:inputType="text"/>
+            android:textSize="@dimen/big_text" />
 
         <TextView
-            android:text="Category:"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:textSize="@dimen/small_text"
-            android:layout_marginTop="8dp"
-            android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:text="Category:"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/small_text" />
 
         <Spinner
             android:layout_width="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:entries="@array/category"
-            android:spinnerMode="dialog"/>
+            android:spinnerMode="dialog" />
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:orientation="horizontal">
 
             <RadioButton
@@ -76,11 +76,11 @@
 
         <TextView
             android:id="@+id/tv_date_created"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:textColor="@color/scarpa_flow"
             android:textSize="@dimen/small_text"
             tools:text="Created: March 9, 2020" />

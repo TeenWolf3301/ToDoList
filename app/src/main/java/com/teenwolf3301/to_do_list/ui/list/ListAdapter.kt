@@ -12,12 +12,13 @@ import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.ListItemBinding
 import com.teenwolf3301.to_do_list.ui.list.ListAdapter.TaskViewHolder
-import com.teenwolf3301.to_do_list.util.APP_ACTIVITY
-import com.teenwolf3301.to_do_list.util.getTextColorSecondary
-import com.teenwolf3301.to_do_list.util.getTextColorTertiary
+import com.teenwolf3301.to_do_list.util.*
 
 class ListAdapter(private val listener: OnItemClickListener) :
     ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
+
+    override fun getItemViewType(position: Int) =
+        if (getItem(position).isCompleted) VIEW_COMPLETED else VIEW_UNCOMPLETED
 
     inner class TaskViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -54,14 +55,17 @@ class ListAdapter(private val listener: OnItemClickListener) :
                     Priority.HIGH -> icPriority.backgroundTintList =
                         ContextCompat.getColorStateList(APP_ACTIVITY, R.color.google_red)
                 }
-                if (cbCompleted.isChecked) {
-                    tvItemName.setTextColor(getTextColorSecondary())
-                    tvItemCategory.visibility = View.GONE
-                    icPriority.visibility = View.INVISIBLE
-                } else {
-                    tvItemName.setTextColor(getTextColorTertiary())
-                    tvItemCategory.visibility = View.VISIBLE
-                    icPriority.visibility = View.VISIBLE
+                when (itemViewType) {
+                    VIEW_COMPLETED -> {
+                        tvItemName.setTextColor(getTextColorSecondary())
+                        tvItemCategory.visibility = View.GONE
+                        icPriority.visibility = View.INVISIBLE
+                    }
+                    VIEW_UNCOMPLETED -> {
+                        tvItemName.setTextColor(getTextColorTertiary())
+                        tvItemCategory.visibility = View.VISIBLE
+                        icPriority.visibility = View.VISIBLE
+                    }
                 }
             }
         }

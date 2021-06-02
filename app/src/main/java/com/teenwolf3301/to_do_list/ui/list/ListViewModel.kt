@@ -16,6 +16,12 @@ class ListViewModel @Inject constructor(
     private val taskDao: TaskDao
 ) : ViewModel() {
 
+    val searchQuery = MutableStateFlow("")
+
+    private val taskFlow = searchQuery.flatMapLatest { taskDao.getTasks(it) }
+
+    val list = taskFlow.asLiveData()
+
     fun onTaskSelected(task: Task) {}
 
     fun onTaskCheckedChanged(task: Task, isChecked: Boolean) = viewModelScope.launch {
@@ -29,12 +35,4 @@ class ListViewModel @Inject constructor(
         }
         return count
     }
-
-    val searchQuery = MutableStateFlow("")
-
-    private val taskFlow = searchQuery.flatMapLatest {
-        taskDao.getTasks(it)
-    }
-
-    val list = taskFlow.asLiveData()
 }
