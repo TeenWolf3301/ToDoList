@@ -2,6 +2,7 @@
     <string name="app_name">To-Do-List</string>
     <string name="fab_content_desc">Add new item</string>
 
+    <string name="stats">%1$d Uncompleted , %2$d completed</string>
 
     <string-array name="category">
         <item>Finance</item>
