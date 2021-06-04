@@ -2,14 +2,14 @@ package com.teenwolf3301.to_do_list.util
 
 import android.R.attr
 import android.util.TypedValue
-import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.RecyclerView
 import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.ui.MainActivity
 
 lateinit var APP_ACTIVITY: MainActivity
 
-const val VIEW_COMPLETED = 1001
-const val VIEW_UNCOMPLETED = 1000
+const val VIEW_COMPLETED = 0
+const val VIEW_UNCOMPLETED = 1
 
 fun getTextColorTertiary(): Int {
     val textColorTertiary = TypedValue()
@@ -27,14 +27,7 @@ fun getTextDefaultSize() = APP_ACTIVITY.resources.getDimension(R.dimen.default_t
 
 fun getDefaultMargin() = APP_ACTIVITY.resources.getDimension(R.dimen.default_margin)
 
-inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit) {
-    this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String?) = true
-
-        override fun onQueryTextChange(newText: String?): Boolean {
-            listener(newText.orEmpty())
-            return true
-        }
-    })
-
+fun RecyclerView.removeItemDecorations() {
+    while (this.itemDecorationCount > 0)
+        this.removeItemDecorationAt(0)
 }
