@@ -27,4 +27,10 @@
         </menu>
     </item>
 
+    <item
+        android:id="@+id/list_menu_hide_completed"
+        android:checkable="true"
+        android:title="Hide All Completed"
+        app:showAsAction="never" />
+
 </menu>

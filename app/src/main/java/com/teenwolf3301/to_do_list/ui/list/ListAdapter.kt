@@ -17,8 +17,11 @@ import com.teenwolf3301.to_do_list.util.*
 class ListAdapter(private val listener: OnItemClickListener) :
     ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
 
-    override fun getItemViewType(position: Int) =
-        if (getItem(position).isCompleted) VIEW_COMPLETED else VIEW_UNCOMPLETED
+    override fun getItemViewType(position: Int): Int {
+        return if (position != RecyclerView.NO_POSITION) {
+            if (getItem(position).isCompleted) VIEW_COMPLETED else VIEW_UNCOMPLETED
+        } else 0
+    }
 
     inner class TaskViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
