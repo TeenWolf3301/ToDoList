@@ -24,26 +24,24 @@
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/big_text" />
 
-        <TextView
-            android:id="@+id/tv_category_label"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:text="Category:"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/small_text" />
+            android:hint="Category">
 
-        <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:entries="@array/category"
-            android:spinnerMode="dialog" />
+            <AutoCompleteTextView
+                android:id="@+id/actv_drop_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="none"
+                tools:text="Finance" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
             android:id="@+id/rg_priority"

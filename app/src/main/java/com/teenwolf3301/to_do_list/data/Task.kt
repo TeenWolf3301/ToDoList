@@ -12,9 +12,9 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
-    val category: String = "Finance",
+    val category: String,
     val isCompleted: Boolean = false,
-    val priority: Priority = Priority.LOW,
+    val priority: Priority,
     val date: Long = System.currentTimeMillis()
 ) : Parcelable {
     val formattedDate: String

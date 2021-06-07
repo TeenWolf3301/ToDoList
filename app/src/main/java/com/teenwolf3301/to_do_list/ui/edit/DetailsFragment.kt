@@ -2,7 +2,9 @@ package com.teenwolf3301.to_do_list.ui.edit
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.teenwolf3301.to_do_list.R
@@ -19,6 +21,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentDetailsBinding.bind(view)
+        val categories = resources.getStringArray(R.array.category)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
 
         binding.apply {
             etTaskName.setText(viewModel.taskName)
@@ -30,6 +34,28 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             rgPriority.jumpDrawablesToCurrentState()
             tvDateCreated.isVisible = viewModel.task != null
             tvDateCreated.text = "Created: ${viewModel.task?.formattedDate}"
+            actvDropMenu.setAdapter(arrayAdapter)
+            if (categories.contains(viewModel.taskCategory)) {
+                actvDropMenu.setText(viewModel.taskCategory, false)
+            }
+
+            etTaskName.addTextChangedListener {
+                viewModel.taskName = it.toString()
+            }
+
+            if (actvDropMenu.isSelected) {
+                viewModel.taskCategory = actvDropMenu.text.toString()
+            }
+
+            when (rgPriority.checkedRadioButtonId) {
+                R.id.rb_high -> viewModel.taskPriority = Priority.HIGH
+                R.id.rb_medium -> viewModel.taskPriority = Priority.MEDIUM
+                R.id.rb_low -> viewModel.taskPriority = Priority.LOW
+            }
+
+            fabApply.setOnClickListener {
+                viewModel.onSaveClick()
+            }
         }
     }
 }

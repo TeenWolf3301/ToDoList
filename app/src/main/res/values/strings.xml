@@ -5,9 +5,9 @@
     <string name="stats">%1$d Uncompleted , %2$d completed</string>
 
     <string-array name="category">
-        <item>Finance</item>
-        <item>Wedding</item>
-        <item>Freelance</item>
-        <item>Shopping list</item>
+        <item>💰Finance</item>
+        <item>💍Wedding</item>
+        <item>💻Freelance</item>
+        <item>🛒Shopping list</item>
     </string-array>
 </resources>

@@ -26,9 +26,13 @@ class DetailsViewModel @Inject constructor(
             state.set("taskCategory", value)
         }
 
-    var taskPriority = state.get<String>("taskName") ?: task?.priority ?: Priority.LOW
+    var taskPriority = state.get<String>("taskName") ?: task?.priority
         set(value) {
             field = value
             state.set("taskName", value)
         }
+
+    fun onSaveClick() {
+        TODO("Not yet implemented")
+    }
 }

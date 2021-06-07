@@ -26,16 +26,79 @@ abstract class TaskDatabase : RoomDatabase() {
             val dao = database.get().taskDao()
 
             appScope.launch {
-                dao.insertTask(Task(name = "First", category = "Freelance"))
-                dao.insertTask(Task(name = "Second", isCompleted = true, category = "Wedding"))
-                dao.insertTask(Task(name = "Third", priority = Priority.MEDIUM))
-                dao.insertTask(Task(name = "Fourth", priority = Priority.MEDIUM))
-                dao.insertTask(Task(name = "Fifth", priority = Priority.HIGH, category = "Wedding"))
-                dao.insertTask(Task(name = "Sixth", isCompleted = true))
-                dao.insertTask(Task(name = "Seventh", isCompleted = true, priority = Priority.HIGH, category = "Shopping list"))
-                dao.insertTask(Task(name = "Eighth"))
-                dao.insertTask(Task(name = "Ninth"))
-                dao.insertTask(Task(name = "Tenth", category = "Shopping list"))
+                dao.insertTask(
+                    Task(
+                        name = "First",
+                        category = "\uD83D\uDCBBFreelance",
+                        priority = Priority.HIGH,
+                        isCompleted = true
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Second",
+                        category = "\uD83D\uDCB0Finance",
+                        priority = Priority.HIGH
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Third",
+                        category = "\uD83D\uDED2Shopping list",
+                        priority = Priority.LOW
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Fourth",
+                        category = "\uD83D\uDCBBFreelance",
+                        priority = Priority.LOW
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Fifth",
+                        category = "\uD83D\uDC8DWedding",
+                        priority = Priority.MEDIUM
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Sixth",
+                        category = "\uD83D\uDCB0Finance",
+                        priority = Priority.LOW,
+                        isCompleted = true
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Seventh",
+                        category = "\uD83D\uDCB0Finance",
+                        priority = Priority.LOW
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Eighth",
+                        category = "\uD83D\uDC8DWedding",
+                        priority = Priority.MEDIUM
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Ninth",
+                        category = "\uD83D\uDCB0Finance",
+                        priority = Priority.LOW
+                    )
+                )
+                dao.insertTask(
+                    Task(
+                        name = "Tenth",
+                        category = "\uD83D\uDC8DWedding",
+                        priority = Priority.MEDIUM,
+                        isCompleted = true
+                    )
+                )
             }
         }
     }
