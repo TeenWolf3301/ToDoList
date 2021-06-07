@@ -9,9 +9,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="32dp"
-        android:paddingBottom="16dp">
+        android:layout_marginTop="@dimen/default_margin"
+        android:orientation="vertical">
 
         <EditText
             android:layout_width="match_parent"
@@ -19,12 +18,14 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:hint="Task name"
+            android:importantForAutofill="no"
             android:inputType="text"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/big_text" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_category_label"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
@@ -34,15 +35,18 @@
             android:textSize="@dimen/small_text" />
 
         <Spinner
+            android:id="@+id/spinner_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:entries="@array/category"
             android:spinnerMode="dialog" />
 
         <RadioGroup
-            android:layout_width="match_parent"
+            android:id="@+id/rg_priority"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
@@ -50,26 +54,28 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_high"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:buttonTint="@color/google_red"
-                android:padding="8dp"
                 android:text="HIGH"
                 android:textColor="@color/google_red" />
 
             <RadioButton
+                android:id="@+id/rb_medium"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/small_margin"
                 android:buttonTint="@color/google_yellow"
-                android:padding="8dp"
                 android:text="MEDIUM"
                 android:textColor="@color/google_yellow" />
 
             <RadioButton
+                android:id="@+id/rb_low"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/small_margin"
                 android:buttonTint="@color/google_green"
-                android:padding="8dp"
                 android:text="LOW"
                 android:textColor="@color/google_green" />
         </RadioGroup>
@@ -92,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/default_margin"
         android:backgroundTint="@color/chambray"
         android:contentDescription="@string/fab_content_desc"
         android:src="@drawable/ic_checkmark"

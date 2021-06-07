@@ -28,9 +28,16 @@
     </item>
 
     <item
-        android:id="@+id/list_menu_hide_completed"
-        android:checkable="true"
-        android:title="Hide All Completed"
-        app:showAsAction="never" />
+        android:id="@+id/list_additional_menu"
+        android:icon="@drawable/ic_menu"
+        android:title="Additional menu"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/list_menu_hide_completed"
+                android:checkable="true"
+                android:title="Hide All Completed" />
+        </menu>
+    </item>
 
 </menu>

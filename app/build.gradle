@@ -54,9 +54,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-
     // Fragment
-    implementation "androidx.fragment:fragment-ktx:1.4.0-alpha01"
+    implementation "androidx.fragment:fragment-ktx:1.4.0-alpha02"
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"

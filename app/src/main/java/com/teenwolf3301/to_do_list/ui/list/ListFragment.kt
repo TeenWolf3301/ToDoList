@@ -94,10 +94,6 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
                 viewModel.hideCompleted.value = item.isChecked
                 true
             }
-            R.id.list_menu_delete_completed -> {
-                // TODO
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
