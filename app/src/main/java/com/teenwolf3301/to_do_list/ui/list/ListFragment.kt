@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teenwolf3301.to_do_list.R
@@ -16,6 +17,8 @@ import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
 import com.teenwolf3301.to_do_list.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 
 @AndroidEntryPoint
@@ -73,25 +76,30 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         searchView.onQueryTextChanged {
             viewModel.searchQuery.value = it
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            menu.findItem(R.id.list_menu_hide_completed).isChecked =
+                viewModel.preferencesFlow.first().hideCompleted
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.list_menu_sort_by_date -> {
-                viewModel.sortOrder.value = SortOrder.BY_DATE
+                viewModel.onSortOrderChange(SortOrder.BY_DATE)
                 true
             }
             R.id.list_menu_sort_by_name -> {
-                viewModel.sortOrder.value = SortOrder.BY_NAME
+                viewModel.onSortOrderChange(SortOrder.BY_NAME)
                 true
             }
             R.id.list_menu_sort_by_priority -> {
-                viewModel.sortOrder.value = SortOrder.BY_PRIORITY
+                viewModel.onSortOrderChange(SortOrder.BY_PRIORITY)
                 true
             }
             R.id.list_menu_hide_completed -> {
                 item.isChecked = !item.isChecked
-                viewModel.hideCompleted.value = item.isChecked
+                viewModel.onHideCompletedChange(item.isChecked)
                 true
             }
             else -> super.onOptionsItemSelected(item)
