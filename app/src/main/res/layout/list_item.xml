@@ -17,7 +17,7 @@
         android:button="@drawable/custom_checkbox"
         android:inputType="none"
         android:minWidth="0dp"
-        android:minHeight="0dp"/>
+        android:minHeight="0dp" />
 
     <TextView
         android:id="@+id/tv_item_name"

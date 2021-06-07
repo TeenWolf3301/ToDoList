@@ -6,18 +6,31 @@
     app:startDestination="@id/listFragment">
 
     <fragment
-        android:id="@+id/editFragment"
-        android:name="com.teenwolf3301.to_do_list.ui.edit.EditFragment"
-        android:label="fragment_edit"
-        tools:layout="@layout/fragment_edit" />
+        android:id="@+id/detailsFragment"
+        android:name="com.teenwolf3301.to_do_list.ui.edit.DetailsFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:argType="com.teenwolf3301.to_do_list.data.Task"
+            app:nullable="true" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/listFragment"
         android:name="com.teenwolf3301.to_do_list.ui.list.ListFragment"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        android:label="List"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_editFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.teenwolf3301.to_do_list.ui.MainActivity"
-        android:label="activity_main"
+        android:label="APP_ACTIVITY"
         tools:layout="@layout/activity_main" />
 </navigation>

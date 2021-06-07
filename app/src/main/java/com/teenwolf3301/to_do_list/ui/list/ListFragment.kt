@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.teenwolf3301.to_do_list.R
@@ -17,6 +18,7 @@ import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
 import com.teenwolf3301.to_do_list.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.DateFormat
@@ -46,6 +48,10 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
                 addItemDecoration(ListHeader(VIEW_UNCOMPLETED, "Uncompleted"))*/
                 setHasFixedSize(true)
             }
+
+            fabAddItem.setOnClickListener {
+                viewModel.addNewItemOnClick()
+            }
         }
 
         viewModel.list.observe(viewLifecycleOwner) { list ->
@@ -55,6 +61,28 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
                     list.count { !it.isCompleted },
                     list.count { it.isCompleted }
                 )
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.itemEvent.collect { event ->
+                when (event) {
+                    is ListViewModel.ItemEvent.NavigateToAddItemScreen -> {
+                        val action = ListFragmentDirections.actionListFragmentToEditFragment(
+                            null,
+                            "New Task"
+                        )
+                        findNavController().navigate(action)
+                    }
+                    is ListViewModel.ItemEvent.NavigateToEditItemScreen -> {
+                        val action =
+                            ListFragmentDirections.actionListFragmentToEditFragment(
+                                event.task,
+                                "Edit Task"
+                            )
+                        findNavController().navigate(action)
+                    }
+                }
             }
         }
 

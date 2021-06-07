@@ -1,31 +1,34 @@
 package com.teenwolf3301.to_do_list.ui.list
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.teenwolf3301.to_do_list.data.PreferencesRepository
 import com.teenwolf3301.to_do_list.data.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.data.TaskDao
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
     private val taskDao: TaskDao,
-    private val preferencesRepository: PreferencesRepository
+    private val preferencesRepository: PreferencesRepository,
+    state: SavedStateHandle
 ) : ViewModel() {
 
-    val searchQuery = MutableStateFlow("")
+    val searchQuery = state.getLiveData("searchQuery", "")
 
     val preferencesFlow = preferencesRepository.preferencesFlow
 
+    private val itemEventChannel = Channel<ItemEvent>()
+    val itemEvent = itemEventChannel.receiveAsFlow()
+
     private val taskFlow = combine(
-        searchQuery,
+        searchQuery.asFlow(),
         preferencesFlow
     ) { query, filterPreferences ->
         Pair(query, filterPreferences)
@@ -35,7 +38,9 @@ class ListViewModel @Inject constructor(
 
     val list = taskFlow.asLiveData()
 
-    fun onTaskSelected(task: Task) {}
+    fun onTaskSelected(task: Task) = viewModelScope.launch {
+        itemEventChannel.send(ItemEvent.NavigateToEditItemScreen(task))
+    }
 
     fun onTaskCheckedChanged(task: Task, isChecked: Boolean) = viewModelScope.launch {
         taskDao.updateTask(task.copy(isCompleted = isChecked))
@@ -47,5 +52,14 @@ class ListViewModel @Inject constructor(
 
     fun onHideCompletedChange(hideCompleted: Boolean) = viewModelScope.launch {
         preferencesRepository.updateHideCompleted(hideCompleted)
+    }
+
+    fun addNewItemOnClick() = viewModelScope.launch {
+        itemEventChannel.send(ItemEvent.NavigateToAddItemScreen)
+    }
+
+    sealed class ItemEvent {
+        object NavigateToAddItemScreen : ItemEvent()
+        data class NavigateToEditItemScreen(val task: Task) : ItemEvent()
     }
 }
