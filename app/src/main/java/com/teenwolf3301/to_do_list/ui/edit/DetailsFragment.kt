@@ -3,14 +3,22 @@ package com.teenwolf3301.to_do_list.ui.edit
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.databinding.FragmentDetailsBinding
+import com.teenwolf3301.to_do_list.ui.edit.DetailsViewModel.DetailsEvent.ErrorWhenSaveClick
+import com.teenwolf3301.to_do_list.ui.edit.DetailsViewModel.DetailsEvent.NavigateBackWhenSaveClick
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment(R.layout.fragment_details) {
@@ -44,18 +52,38 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 viewModel.taskName = it.toString()
             }
 
-            if (dropdownText.isSelected) {
+            dropdownText.addTextChangedListener {
                 viewModel.taskCategory = dropdownText.text.toString()
             }
 
-            when (rgPriority.checkedRadioButtonId) {
-                R.id.rb_high -> viewModel.taskPriority = Priority.HIGH
-                R.id.rb_medium -> viewModel.taskPriority = Priority.MEDIUM
-                R.id.rb_low -> viewModel.taskPriority = Priority.LOW
+            rgPriority.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rb_high -> viewModel.taskPriority = Priority.HIGH
+                    R.id.rb_medium -> viewModel.taskPriority = Priority.MEDIUM
+                    R.id.rb_low -> viewModel.taskPriority = Priority.LOW
+                }
             }
 
             fabApply.setOnClickListener {
                 viewModel.onSaveClick()
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.detailsChannel.collect { event ->
+                when (event) {
+                    is ErrorWhenSaveClick -> {
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()
+                    }
+                    is NavigateBackWhenSaveClick -> {
+                        binding.etTaskName.clearFocus()
+                        setFragmentResult(
+                            "details_result",
+                            bundleOf("details_result" to event.result)
+                        )
+                        findNavController().popBackStack()
+                    }
+                }
             }
         }
     }

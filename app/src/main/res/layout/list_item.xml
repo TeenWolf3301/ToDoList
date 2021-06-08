@@ -30,7 +30,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:textColor="@color/textColorTertiary"
+        android:textColor="?android:textColorTertiary"
         android:textSize="@dimen/default_text"
         tools:text="Task" />
 
@@ -46,7 +46,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:maxLines="1"
-        android:textColor="@color/textColorSecondary"
+        android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/small_text"
         tools:text="Category" />
 

@@ -5,6 +5,8 @@ import com.teenwolf3301.to_do_list.data.PreferencesRepository
 import com.teenwolf3301.to_do_list.data.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.data.TaskDao
+import com.teenwolf3301.to_do_list.util.ADD_ITEM_RESULT_OK
+import com.teenwolf3301.to_do_list.util.UPDATE_ITEM_RESULT_OK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
@@ -24,8 +26,8 @@ class ListViewModel @Inject constructor(
 
     val preferencesFlow = preferencesRepository.preferencesFlow
 
-    private val itemEventChannel = Channel<ListEvent>()
-    val itemEvent = itemEventChannel.receiveAsFlow()
+    private val listEventChannel = Channel<ListEvent>()
+    val listEvent = listEventChannel.receiveAsFlow()
 
     private val taskFlow = combine(
         searchQuery.asFlow(),
@@ -39,7 +41,7 @@ class ListViewModel @Inject constructor(
     val list = taskFlow.asLiveData()
 
     fun onTaskSelected(task: Task) = viewModelScope.launch {
-        itemEventChannel.send(ListEvent.NavigateToEditItemScreen(task))
+        listEventChannel.send(ListEvent.NavigateToEditItemScreen(task))
     }
 
     fun onTaskCheckedChanged(task: Task, isChecked: Boolean) = viewModelScope.launch {
@@ -55,11 +57,23 @@ class ListViewModel @Inject constructor(
     }
 
     fun onAddNewItemClick() = viewModelScope.launch {
-        itemEventChannel.send(ListEvent.NavigateToAddItemScreen)
+        listEventChannel.send(ListEvent.NavigateToAddItemScreen)
+    }
+
+    fun onDetailsResult(result: Int) {
+        when (result) {
+            ADD_ITEM_RESULT_OK -> showConfirmMessage("Task is added!")
+            UPDATE_ITEM_RESULT_OK -> showConfirmMessage("Task is updated!")
+        }
+    }
+
+    private fun showConfirmMessage(text: String) = viewModelScope.launch {
+        listEventChannel.send(ListEvent.ShowConfirmMessage(text))
     }
 
     sealed class ListEvent {
         object NavigateToAddItemScreen : ListEvent()
         data class NavigateToEditItemScreen(val task: Task) : ListEvent()
+        data class ShowConfirmMessage(val msg: String) : ListEvent()
     }
 }

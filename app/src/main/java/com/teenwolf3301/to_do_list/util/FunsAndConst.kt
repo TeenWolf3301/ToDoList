@@ -10,6 +10,8 @@ lateinit var APP_ACTIVITY: MainActivity
 
 const val VIEW_UNCOMPLETED = 1000
 const val VIEW_COMPLETED = 1001
+const val ADD_ITEM_RESULT_OK = 10
+const val UPDATE_ITEM_RESULT_OK = 11
 
 fun getTextColorTertiary(): Int {
     val textColorTertiary = TypedValue()

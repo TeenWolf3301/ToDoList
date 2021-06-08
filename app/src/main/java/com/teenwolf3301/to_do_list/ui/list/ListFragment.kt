@@ -7,15 +7,18 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.data.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
+import com.teenwolf3301.to_do_list.ui.list.ListViewModel.ListEvent.*
 import com.teenwolf3301.to_do_list.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -54,8 +57,14 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
             }
         }
 
+        setFragmentResultListener("details_result") { _, bundle ->
+            val result = bundle.getInt("details_result")
+            viewModel.onDetailsResult(result)
+        }
+
         viewModel.list.observe(viewLifecycleOwner) { list ->
             listAdapter.submitList(list) {
+                listRecyclerView.scrollToPosition(0)
                 binding.tvStats.text = resources.getString(
                     R.string.stats,
                     list.count { !it.isCompleted },
@@ -65,22 +74,25 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.itemEvent.collect { event ->
+            viewModel.listEvent.collect { event ->
                 when (event) {
-                    is ListViewModel.ListEvent.NavigateToAddItemScreen -> {
+                    is NavigateToAddItemScreen -> {
                         val action = ListFragmentDirections.actionListFragmentToEditFragment(
                             null,
                             "New Task"
                         )
                         findNavController().navigate(action)
                     }
-                    is ListViewModel.ListEvent.NavigateToEditItemScreen -> {
+                    is NavigateToEditItemScreen -> {
                         val action =
                             ListFragmentDirections.actionListFragmentToEditFragment(
                                 event.task,
                                 "Edit Task"
                             )
                         findNavController().navigate(action)
+                    }
+                    is ShowConfirmMessage -> {
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }

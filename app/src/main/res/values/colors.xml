@@ -23,9 +23,4 @@
     <color name="google_red">#DB4437</color>
     <color name="google_yellow">#F4B400</color>
     <color name="google_green">#0F9D58</color>
-
-    // Text
-    <color name="textColorPrimary">?android:textColorPrimary</color>
-    <color name="textColorSecondary">?android:textColorSecondary</color>
-    <color name="textColorTertiary">?android:textColorTertiary</color>
 </resources>

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text"
-                android:textColor="@color/textColorPrimary"
+                android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/big_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="none"
-                android:textColor="@color/textColorPrimary" />
+                android:textColor="?android:textColorPrimary" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:text="@string/label_priority"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/small_text" />
 
         <RadioGroup
