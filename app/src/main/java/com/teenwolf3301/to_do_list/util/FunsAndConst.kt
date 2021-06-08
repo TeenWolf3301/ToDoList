@@ -8,8 +8,8 @@ import com.teenwolf3301.to_do_list.ui.MainActivity
 
 lateinit var APP_ACTIVITY: MainActivity
 
-const val VIEW_COMPLETED = 1001
 const val VIEW_UNCOMPLETED = 1000
+const val VIEW_COMPLETED = 1001
 
 fun getTextColorTertiary(): Int {
     val textColorTertiary = TypedValue()

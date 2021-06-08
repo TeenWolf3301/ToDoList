@@ -24,7 +24,7 @@ class ListViewModel @Inject constructor(
 
     val preferencesFlow = preferencesRepository.preferencesFlow
 
-    private val itemEventChannel = Channel<ItemEvent>()
+    private val itemEventChannel = Channel<ListEvent>()
     val itemEvent = itemEventChannel.receiveAsFlow()
 
     private val taskFlow = combine(
@@ -39,7 +39,7 @@ class ListViewModel @Inject constructor(
     val list = taskFlow.asLiveData()
 
     fun onTaskSelected(task: Task) = viewModelScope.launch {
-        itemEventChannel.send(ItemEvent.NavigateToEditItemScreen(task))
+        itemEventChannel.send(ListEvent.NavigateToEditItemScreen(task))
     }
 
     fun onTaskCheckedChanged(task: Task, isChecked: Boolean) = viewModelScope.launch {
@@ -54,12 +54,12 @@ class ListViewModel @Inject constructor(
         preferencesRepository.updateHideCompleted(hideCompleted)
     }
 
-    fun addNewItemOnClick() = viewModelScope.launch {
-        itemEventChannel.send(ItemEvent.NavigateToAddItemScreen)
+    fun onAddNewItemClick() = viewModelScope.launch {
+        itemEventChannel.send(ListEvent.NavigateToAddItemScreen)
     }
 
-    sealed class ItemEvent {
-        object NavigateToAddItemScreen : ItemEvent()
-        data class NavigateToEditItemScreen(val task: Task) : ItemEvent()
+    sealed class ListEvent {
+        object NavigateToAddItemScreen : ListEvent()
+        data class NavigateToEditItemScreen(val task: Task) : ListEvent()
     }
 }

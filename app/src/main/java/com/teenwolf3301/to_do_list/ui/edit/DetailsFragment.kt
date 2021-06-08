@@ -34,17 +34,17 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             rgPriority.jumpDrawablesToCurrentState()
             tvDateCreated.isVisible = viewModel.task != null
             tvDateCreated.text = "Created: ${viewModel.task?.formattedDate}"
-            actvDropMenu.setAdapter(arrayAdapter)
+            dropdownText.setAdapter(arrayAdapter)
             if (categories.contains(viewModel.taskCategory)) {
-                actvDropMenu.setText(viewModel.taskCategory, false)
+                dropdownText.setText(viewModel.taskCategory, false)
             }
 
             etTaskName.addTextChangedListener {
                 viewModel.taskName = it.toString()
             }
 
-            if (actvDropMenu.isSelected) {
-                viewModel.taskCategory = actvDropMenu.text.toString()
+            if (dropdownText.isSelected) {
+                viewModel.taskCategory = dropdownText.text.toString()
             }
 
             when (rgPriority.checkedRadioButtonId) {

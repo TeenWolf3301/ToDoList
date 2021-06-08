@@ -7,24 +7,31 @@
     tools:context=".ui.edit.DetailsFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_task_name"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:hint="Task name"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/big_text" />
+            android:hint="Task name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_task_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textSize="@dimen/big_text"
+                android:textColor="?android:textColorPrimary"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dropdown_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +41,7 @@
             android:hint="Category">
 
             <AutoCompleteTextView
-                android:id="@+id/actv_drop_menu"
+                android:id="@+id/dropdown_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

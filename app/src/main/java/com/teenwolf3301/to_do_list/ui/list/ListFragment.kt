@@ -50,7 +50,7 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
             }
 
             fabAddItem.setOnClickListener {
-                viewModel.addNewItemOnClick()
+                viewModel.onAddNewItemClick()
             }
         }
 
@@ -67,14 +67,14 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.itemEvent.collect { event ->
                 when (event) {
-                    is ListViewModel.ItemEvent.NavigateToAddItemScreen -> {
+                    is ListViewModel.ListEvent.NavigateToAddItemScreen -> {
                         val action = ListFragmentDirections.actionListFragmentToEditFragment(
                             null,
                             "New Task"
                         )
                         findNavController().navigate(action)
                     }
-                    is ListViewModel.ItemEvent.NavigateToEditItemScreen -> {
+                    is ListViewModel.ListEvent.NavigateToEditItemScreen -> {
                         val action =
                             ListFragmentDirections.actionListFragmentToEditFragment(
                                 event.task,
