@@ -11,18 +11,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/bigger_text"
             tools:text="March 9, 2020" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_stats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="@dimen/divider_height"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
@@ -58,10 +58,10 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/default_margin"
         android:backgroundTint="@color/chambray"
-        android:contentDescription="@string/fab_content_desc"
+        android:contentDescription="@string/content_desc_add_item"
         android:src="@drawable/ic_add_item"
         app:backgroundTint="@color/indigo"
-        app:borderWidth="2dp"
+        app:borderWidth="@dimen/border_with"
         app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

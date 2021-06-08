@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">To-Do-List</string>
-    <string name="fab_content_desc">Add new item</string>
-
+    // App
+    <string name="app_name">To-Do List</string>
     <string name="stats">%1$d Uncompleted , %2$d completed</string>
+    <string name="date_created">"Created: %1$s"</string>
 
     <string-array name="category">
         <item>💰Finance</item>
@@ -10,4 +10,25 @@
         <item>💻Freelance</item>
         <item>🛒Shopping list</item>
     </string-array>
+
+    // Desc
+    <string name="content_desc_add_item">Add new item</string>
+    <string name="content_desc_save_item">Save item</string>
+
+    // Hint
+    <string name="hint_task_name">Task name</string>
+    <string name="hint_task_category">Category</string>
+
+    // Label
+    <string name="label_priority">Priority</string>
+    <string name="label_priority_high">HIGH</string>
+    <string name="label_priority_medium">MEDIUM</string>
+    <string name="label_priority_low">LOW</string>
+    <string name="label_menu_search">Search</string>
+    <string name="label_menu_sort">Sort</string>
+    <string name="label_menu_sort_by_name">Sort by name</string>
+    <string name="label_menu_sort_by_date">Sort by date</string>
+    <string name="label_menu_sort_by_priority">Sort by priority</string>
+    <string name="label_menu_other">Other</string>
+    <string name="label_menu_hide_all_completed">Hide All Completed</string>
 </resources>

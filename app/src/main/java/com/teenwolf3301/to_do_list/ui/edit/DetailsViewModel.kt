@@ -2,7 +2,6 @@ package com.teenwolf3301.to_do_list.ui.edit
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.data.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

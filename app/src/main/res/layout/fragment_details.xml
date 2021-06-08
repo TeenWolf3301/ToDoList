@@ -16,18 +16,19 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:hint="Task name">
+            android:hint="@string/hint_task_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_task_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:inputType="text"
-                android:textSize="@dimen/big_text"
-                android:textColor="?android:textColorPrimary"/>
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/big_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -38,55 +39,72 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:hint="Category">
+            android:hint="@string/hint_task_category">
 
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/dropdown_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="none"
-                tools:text="Finance" />
+                android:textColor="@color/textColorPrimary" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioGroup
-            android:id="@+id/rg_priority"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_header_priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
+            android:text="@string/label_priority"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/small_text" />
+
+        <RadioGroup
+            android:id="@+id/rg_priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:background="@drawable/radio_group_background"
             android:orientation="horizontal">
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_high"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:buttonTint="@color/google_red"
-                android:text="HIGH"
-                android:textColor="@color/google_red" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/label_priority_high"
+                android:textColor="@color/google_red"
+                app:buttonTint="@color/google_red" />
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/small_margin"
-                android:buttonTint="@color/google_yellow"
-                android:text="MEDIUM"
-                android:textColor="@color/google_yellow" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/label_priority_medium"
+                android:textColor="@color/google_yellow"
+                app:buttonTint="@color/google_yellow" />
 
-            <RadioButton
+            <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_low"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/small_margin"
-                android:buttonTint="@color/google_green"
-                android:text="LOW"
-                android:textColor="@color/google_green" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/label_priority_low"
+                android:textColor="@color/google_green"
+                app:buttonTint="@color/google_green" />
         </RadioGroup>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_date_created"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,10 +124,10 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/default_margin"
         android:backgroundTint="@color/chambray"
-        android:contentDescription="@string/fab_content_desc"
+        android:contentDescription="@string/content_desc_save_item"
         android:src="@drawable/ic_checkmark"
         app:backgroundTint="@color/indigo"
-        app:borderWidth="2dp"
+        app:borderWidth="@dimen/border_with"
         app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

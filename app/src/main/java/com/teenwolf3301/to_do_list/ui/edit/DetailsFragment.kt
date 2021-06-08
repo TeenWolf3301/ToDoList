@@ -33,7 +33,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             }
             rgPriority.jumpDrawablesToCurrentState()
             tvDateCreated.isVisible = viewModel.task != null
-            tvDateCreated.text = "Created: ${viewModel.task?.formattedDate}"
+            tvDateCreated.text =
+                resources.getString(R.string.date_created, viewModel.task?.formattedDate)
             dropdownText.setAdapter(arrayAdapter)
             if (categories.contains(viewModel.taskCategory)) {
                 dropdownText.setText(viewModel.taskCategory, false)
