@@ -1,6 +1,5 @@
 package com.teenwolf3301.to_do_list.util
 
-import android.R.attr
 import android.util.TypedValue
 import androidx.appcompat.widget.SearchView
 import com.teenwolf3301.to_do_list.R
@@ -12,16 +11,17 @@ const val VIEW_UNCOMPLETED = 1000
 const val VIEW_COMPLETED = 1001
 const val ADD_ITEM_RESULT_OK = 10
 const val UPDATE_ITEM_RESULT_OK = 11
+const val DELETE_ITEM_RESULT_OK = 12
 
 fun getTextColorTertiary(): Int {
     val textColorTertiary = TypedValue()
-    APP_ACTIVITY.theme.resolveAttribute(attr.textColorTertiary, textColorTertiary, true)
+    APP_ACTIVITY.theme.resolveAttribute(R.attr.textColorTertiary, textColorTertiary, true)
     return textColorTertiary.data
 }
 
 fun getTextColorSecondary(): Int {
     val textColorSecondary = TypedValue()
-    APP_ACTIVITY.theme.resolveAttribute(attr.textColorSecondary, textColorSecondary, true)
+    APP_ACTIVITY.theme.resolveAttribute(R.attr.textColorSecondary, textColorSecondary, true)
     return textColorSecondary.data
 }
 

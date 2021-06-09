@@ -6,6 +6,7 @@ import com.teenwolf3301.to_do_list.data.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.data.TaskDao
 import com.teenwolf3301.to_do_list.util.ADD_ITEM_RESULT_OK
+import com.teenwolf3301.to_do_list.util.DELETE_ITEM_RESULT_OK
 import com.teenwolf3301.to_do_list.util.UPDATE_ITEM_RESULT_OK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -60,10 +61,14 @@ class ListViewModel @Inject constructor(
         listEventChannel.send(ListEvent.NavigateToAddItemScreen)
     }
 
-    fun onDetailsResult(result: Int) {
+    fun onDetailsResult(result: Int, task: Task? = null) {
         when (result) {
             ADD_ITEM_RESULT_OK -> showConfirmMessage("Task is added!")
             UPDATE_ITEM_RESULT_OK -> showConfirmMessage("Task is updated!")
+            DELETE_ITEM_RESULT_OK -> {
+                if (task != null)
+                    showConfirmMessageWithUndo(task)
+            }
         }
     }
 
@@ -71,9 +76,18 @@ class ListViewModel @Inject constructor(
         listEventChannel.send(ListEvent.ShowConfirmMessage(text))
     }
 
+    private fun showConfirmMessageWithUndo(task: Task) = viewModelScope.launch {
+        listEventChannel.send(ListEvent.ShowConfirmDeleteMessage(task))
+    }
+
+    fun onUndoDeleteClick(task: Task) = viewModelScope.launch {
+        taskDao.insertTask(task)
+    }
+
     sealed class ListEvent {
         object NavigateToAddItemScreen : ListEvent()
         data class NavigateToEditItemScreen(val task: Task) : ListEvent()
         data class ShowConfirmMessage(val msg: String) : ListEvent()
+        data class ShowConfirmDeleteMessage(val task: Task) : ListEvent()
     }
 }

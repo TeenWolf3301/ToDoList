@@ -6,7 +6,7 @@
                 android:left="2dp"
                 android:right="2dp"
                 android:top="2dp" />
-            <solid android:color="?android:textColorPrimaryInverse" />
+            <solid android:color="?checkboxBorderColor" />
             <corners android:radius="6dp" />
             <size
                 android:width="24dp"
@@ -16,9 +16,9 @@
     <item>
         <shape>
             <gradient
-                android:endColor="?customColorDrawableValue"
+                android:endColor="?checkboxGradientEndColor"
                 android:gradientRadius="180"
-                android:startColor="?customColorValue" />
+                android:startColor="?checkboxGradientStartColor" />
             <corners android:radius="6dp" />
             <size
                 android:width="24dp"

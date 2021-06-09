@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Primary
-    <color name="indigo">#515CC6</color>
-    <color name="chambray">#3F4EA0</color>
+    <color name="indigo_400">#515CC6</color>
+    <color name="indigo_600">#3F4EA0</color>
 
-    <color name="scarpa_flow">#575767</color>
+    <color name="mid_gray">#575767</color>
     <color name="charade">#2B2D37</color>
-    <color name="charade_darker">#262933</color>
-    <color name="woodsmoke_dark">#0E0E11</color>
+    <color name="shark">#262933</color>
+    <color name="cinder">#0E0E11</color>
     <color name="black">#000</color>
 
-    <color name="white">#FFF</color>
-    <color name="alabaster_darker">#FCFCFC</color>
+    <color name="grey_50">#FCFCFC</color>
     <color name="alto">#DADADA</color>
     <color name="french_grey">#B9B9BE</color>
+    <color name="white">#FFF</color>
 
     // Background
     <color name="woodsmoke">#141419</color>

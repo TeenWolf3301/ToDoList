@@ -2,26 +2,31 @@
     <!-- Base application theme. -->
     <style name="Theme.ToDoList" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/indigo</item>
-        <item name="colorPrimaryVariant">@color/chambray</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/indigo_400</item>
+        <item name="colorPrimaryVariant">@color/indigo_600</item>
+        <item name="colorOnPrimary">@color/alabaster</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/indigo</item>
-        <item name="colorSecondaryVariant">@color/chambray</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/indigo_400</item>
+        <item name="colorSecondaryVariant">@color/indigo_600</item>
+        <item name="colorOnSecondary">@color/cinder</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Additional color attributes -->
         <item name="android:colorBackground">@color/alabaster</item>
+        <item name="colorOnBackground">@color/cinder</item>
 
-        <item name="android:textColorPrimary">@color/woodsmoke_dark</item>
-        <item name="android:textColorPrimaryInverse">@color/alto</item>
+        <item name="colorSurface">@color/alabaster</item>
+        <item name="colorOnSurface">@color/cinder</item>
 
-        <item name="android:textColorSecondary">@color/french_grey</item>
+        <!-- Custom attr -->
+        <item name="textColorPrimary">@color/cinder</item>
+        <item name="textColorSecondary">@color/french_grey</item>
+        <item name="textColorTertiary">@color/mid_gray</item>
 
-        <item name="android:textColorTertiary">@color/scarpa_flow</item>
-
-        <item name="customColorValue">@color/alabaster_darker</item>
-        <item name="customColorDrawableValue">@color/alabaster</item>
+        <item name="checkmarkColor">@color/mid_gray</item>
+        <item name="checkboxBorderColor">@color/alto</item>
+        <item name="radiogroupBorderColor">@color/alto</item>
+        <item name="checkboxGradientStartColor">@color/grey_50</item>
+        <item name="checkboxGradientEndColor">@color/alabaster</item>
     </style>
 </resources>

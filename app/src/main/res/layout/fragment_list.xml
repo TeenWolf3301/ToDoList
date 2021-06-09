@@ -18,7 +18,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="?textColorPrimary"
             android:textSize="@dimen/bigger_text"
             tools:text="March 9, 2020" />
 
@@ -29,7 +29,7 @@
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/default_margin"
-            android:textColor="@color/scarpa_flow"
+            android:textColor="@color/mid_gray"
             android:textSize="@dimen/small_text"
             tools:text="5 incomplete, 5 completed" />
 
@@ -46,6 +46,8 @@
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginTop="@dimen/default_margin"
             tools:listitem="@layout/list_item" />
 
@@ -57,10 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/default_margin"
-        android:backgroundTint="@color/chambray"
+        android:backgroundTint="@color/indigo_600"
         android:contentDescription="@string/content_desc_add_item"
         android:src="@drawable/ic_add_item"
-        app:backgroundTint="@color/indigo"
+        app:backgroundTint="@color/indigo_400"
         app:borderWidth="@dimen/border_with"
         app:tint="@color/white" />
 

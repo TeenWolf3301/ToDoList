@@ -1,6 +1,9 @@
 package com.teenwolf3301.to_do_list.ui.edit
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
@@ -15,8 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.databinding.FragmentDetailsBinding
-import com.teenwolf3301.to_do_list.ui.edit.DetailsViewModel.DetailsEvent.ErrorWhenSaveClick
-import com.teenwolf3301.to_do_list.ui.edit.DetailsViewModel.DetailsEvent.NavigateBackWhenSaveClick
+import com.teenwolf3301.to_do_list.ui.edit.DetailsViewModel.DetailsEvent.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -75,16 +77,38 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                     is ErrorWhenSaveClick -> {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()
                     }
-                    is NavigateBackWhenSaveClick -> {
+                    is NavigateBackWhenClick -> {
                         binding.etTaskName.clearFocus()
                         setFragmentResult(
-                            "details_result",
+                            "details_request",
                             bundleOf("details_result" to event.result)
+                        )
+                        findNavController().popBackStack()
+                    }
+                    is NavigateBackWhenDeleteClick -> {
+                        binding.etTaskName.clearFocus()
+                        setFragmentResult(
+                            "details_request",
+                            bundleOf("details_result" to event.result, "deleted_task" to event.task)
                         )
                         findNavController().popBackStack()
                     }
                 }
             }
         }
+
+        if (viewModel.task != null) setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.details_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.details_menu_delete -> {
+            viewModel.onDeleteClick()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 }

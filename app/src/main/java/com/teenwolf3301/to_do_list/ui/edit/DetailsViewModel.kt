@@ -7,6 +7,7 @@ import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.data.TaskDao
 import com.teenwolf3301.to_do_list.util.ADD_ITEM_RESULT_OK
+import com.teenwolf3301.to_do_list.util.DELETE_ITEM_RESULT_OK
 import com.teenwolf3301.to_do_list.util.UPDATE_ITEM_RESULT_OK
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -66,14 +67,23 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
+    fun onDeleteClick() {
+        if (task != null) deleteTask(task)
+    }
+
     private fun addNewTask(task: Task) = viewModelScope.launch {
         taskDao.insertTask(task)
-        detailsEventChannel.send(DetailsEvent.NavigateBackWhenSaveClick(ADD_ITEM_RESULT_OK))
+        detailsEventChannel.send(DetailsEvent.NavigateBackWhenClick(ADD_ITEM_RESULT_OK))
     }
 
     private fun updateTask(task: Task) = viewModelScope.launch {
         taskDao.updateTask(task)
-        detailsEventChannel.send(DetailsEvent.NavigateBackWhenSaveClick(UPDATE_ITEM_RESULT_OK))
+        detailsEventChannel.send(DetailsEvent.NavigateBackWhenClick(UPDATE_ITEM_RESULT_OK))
+    }
+
+    private fun deleteTask(task: Task) = viewModelScope.launch {
+        taskDao.deleteTask(task)
+        detailsEventChannel.send(DetailsEvent.NavigateBackWhenDeleteClick(DELETE_ITEM_RESULT_OK, task))
     }
 
     private fun showErrorMessage(text: String) = viewModelScope.launch {
@@ -82,6 +92,7 @@ class DetailsViewModel @Inject constructor(
 
     sealed class DetailsEvent {
         data class ErrorWhenSaveClick(val msg: String) : DetailsEvent()
-        data class NavigateBackWhenSaveClick(val result: Int) : DetailsEvent()
+        data class NavigateBackWhenClick(val result: Int) : DetailsEvent()
+        data class NavigateBackWhenDeleteClick(val result: Int, val task: Task) : DetailsEvent()
     }
 }

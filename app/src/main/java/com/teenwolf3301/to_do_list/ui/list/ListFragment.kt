@@ -11,7 +11,6 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.teenwolf3301.to_do_list.R
@@ -46,7 +45,6 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
 
             listRecyclerView.apply {
                 adapter = listAdapter
-                layoutManager = LinearLayoutManager(requireContext())
 /*                addItemDecoration(ListHeader(VIEW_COMPLETED, "Completed"))
                 addItemDecoration(ListHeader(VIEW_UNCOMPLETED, "Uncompleted"))*/
                 setHasFixedSize(true)
@@ -57,9 +55,12 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
             }
         }
 
-        setFragmentResultListener("details_result") { _, bundle ->
+        setFragmentResultListener("details_request") { _, bundle ->
             val result = bundle.getInt("details_result")
-            viewModel.onDetailsResult(result)
+            if (bundle.containsKey("deleted_task")) {
+                val deletedTask = bundle.get("deleted_task") as Task
+                viewModel.onDetailsResult(result, deletedTask)
+            } else viewModel.onDetailsResult(result)
         }
 
         viewModel.list.observe(viewLifecycleOwner) { list ->
@@ -94,6 +95,12 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
                     is ShowConfirmMessage -> {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()
                     }
+                    is ShowConfirmDeleteMessage -> {
+                        Snackbar.make(requireView(), "Task deleted!", Snackbar.LENGTH_SHORT)
+                            .setAction("UNDO") {
+                                viewModel.onUndoDeleteClick(event.task)
+                            }.show()
+                    }
                 }
             }
         }
@@ -123,27 +130,25 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.list_menu_sort_by_date -> {
-                viewModel.onSortOrderChange(SortOrder.BY_DATE)
-                true
-            }
-            R.id.list_menu_sort_by_name -> {
-                viewModel.onSortOrderChange(SortOrder.BY_NAME)
-                true
-            }
-            R.id.list_menu_sort_by_priority -> {
-                viewModel.onSortOrderChange(SortOrder.BY_PRIORITY)
-                true
-            }
-            R.id.list_menu_hide_completed -> {
-                item.isChecked = !item.isChecked
-                viewModel.onHideCompletedChange(item.isChecked)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.list_menu_sort_by_date -> {
+            viewModel.onSortOrderChange(SortOrder.BY_DATE)
+            true
         }
+        R.id.list_menu_sort_by_name -> {
+            viewModel.onSortOrderChange(SortOrder.BY_NAME)
+            true
+        }
+        R.id.list_menu_sort_by_priority -> {
+            viewModel.onSortOrderChange(SortOrder.BY_PRIORITY)
+            true
+        }
+        R.id.list_menu_hide_completed -> {
+            item.isChecked = !item.isChecked
+            viewModel.onHideCompletedChange(item.isChecked)
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onItemClick(task: Task) {
