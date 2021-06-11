@@ -7,6 +7,7 @@
     tools:context=".ui.list.ListFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -31,6 +32,7 @@
             android:layout_marginEnd="@dimen/default_margin"
             android:textColor="@color/mid_gray"
             android:textSize="@dimen/small_text"
+            android:visibility="visible"
             tools:text="5 incomplete, 5 completed" />
 
         <View
@@ -46,12 +48,35 @@
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_margin"
+            android:nestedScrollingEnabled="false"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_marginTop="@dimen/default_margin"
+            tools:itemCount="10"
             tools:listitem="@layout/list_item" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ImageView
+        android:id="@+id/iv_empty_db"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center|top"
+        android:contentDescription="@string/content_desc_empty_db"
+        android:src="@drawable/ic_empty_db"
+        android:visibility="gone"
+        app:layout_anchor="@+id/tv_empty_db"
+        app:layout_anchorGravity="center|top" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_empty_db"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_db"
+        android:textColor="?textColorSecondary"
+        android:visibility="gone"
+        app:layout_anchor="@+id/rv_list"
+        app:layout_anchorGravity="center" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_item"

@@ -41,6 +41,12 @@ class ListViewModel @Inject constructor(
 
     val list = taskFlow.asLiveData()
 
+    val emptyDatabase = MutableLiveData(true)
+
+    fun onEmptyDatabase(list: List<Task>) {
+        emptyDatabase.value = list.isEmpty()
+    }
+
     fun onTaskSelected(task: Task) = viewModelScope.launch {
         listEventChannel.send(ListEvent.NavigateToEditItemScreen(task))
     }
@@ -72,16 +78,16 @@ class ListViewModel @Inject constructor(
         }
     }
 
+    fun onUndoDeleteClick(task: Task) = viewModelScope.launch {
+        taskDao.insertTask(task)
+    }
+
     private fun showConfirmMessage(text: String) = viewModelScope.launch {
         listEventChannel.send(ListEvent.ShowConfirmMessage(text))
     }
 
     private fun showConfirmMessageWithUndo(task: Task) = viewModelScope.launch {
         listEventChannel.send(ListEvent.ShowConfirmDeleteMessage(task))
-    }
-
-    fun onUndoDeleteClick(task: Task) = viewModelScope.launch {
-        taskDao.insertTask(task)
     }
 
     sealed class ListEvent {

@@ -18,11 +18,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(
-        app: Application,
-        callback: TaskDatabase.Callback
+        app: Application
     ) = Room.databaseBuilder(app, TaskDatabase::class.java, "todo_database")
         .fallbackToDestructiveMigration()
-        .addCallback(callback)
         .build()
 
     @Provides

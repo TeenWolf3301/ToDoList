@@ -18,6 +18,8 @@ import com.teenwolf3301.to_do_list.data.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
 import com.teenwolf3301.to_do_list.ui.list.ListViewModel.ListEvent.*
+import com.teenwolf3301.to_do_list.util.VIEW_COMPLETED
+import com.teenwolf3301.to_do_list.util.VIEW_UNCOMPLETED
 import com.teenwolf3301.to_do_list.util.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -45,8 +47,8 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
 
             listRecyclerView.apply {
                 adapter = listAdapter
-/*                addItemDecoration(ListHeader(VIEW_COMPLETED, "Completed"))
-                addItemDecoration(ListHeader(VIEW_UNCOMPLETED, "Uncompleted"))*/
+                addItemDecoration(ListHeader(VIEW_COMPLETED, "Completed"))
+                addItemDecoration(ListHeader(VIEW_UNCOMPLETED, "Uncompleted"))
                 setHasFixedSize(true)
             }
 
@@ -65,12 +67,38 @@ class ListFragment : Fragment(R.layout.fragment_list), ListAdapter.OnItemClickLi
 
         viewModel.list.observe(viewLifecycleOwner) { list ->
             listAdapter.submitList(list) {
+                viewModel.onEmptyDatabase(list)
+                listAdapter.notifyDataSetChanged()
                 listRecyclerView.scrollToPosition(0)
-                binding.tvStats.text = resources.getString(
-                    R.string.stats,
-                    list.count { !it.isCompleted },
-                    list.count { it.isCompleted }
-                )
+                binding.tvStats.text = when {
+                    list.count { !it.isCompleted } == 0 -> {
+                        resources.getString(R.string.statsCompleted, list.count { it.isCompleted })
+                    }
+                    list.count { it.isCompleted } == 0 -> {
+                        resources.getString(R.string.statsUncompleted, list.count { !it.isCompleted })
+                    }
+                    else -> {
+                        resources.getString(
+                            R.string.stats,
+                            resources.getString(R.string.statsUncompleted, list.count { !it.isCompleted }),
+                            resources.getString(R.string.statsCompleted, list.count { it.isCompleted })
+                        )
+                    }
+                }
+            }
+        }
+
+        viewModel.emptyDatabase.observe(viewLifecycleOwner) { isEmpty ->
+            binding.apply {
+                if (isEmpty) {
+                    tvStats.visibility = View.GONE
+                    tvEmptyDb.visibility = View.VISIBLE
+                    ivEmptyDb.visibility = View.VISIBLE
+                } else {
+                    tvStats.visibility = View.VISIBLE
+                    tvEmptyDb.visibility = View.GONE
+                    ivEmptyDb.visibility = View.GONE
+                }
             }
         }
 

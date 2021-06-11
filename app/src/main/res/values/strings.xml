@@ -1,7 +1,10 @@
 <resources>
     // App
     <string name="app_name">To-Do List</string>
-    <string name="stats">%1$d Uncompleted , %2$d completed</string>
+    <string name="stats">%1$s, %2$s.</string>
+    <string name="statsCompleted">%1$d Completed</string>
+    <string name="statsUncompleted">%1$d Uncompleted</string>
+    <string name="empty_db">No Data</string>
     <string name="date_created">"Created: %1$s"</string>
 
     <string-array name="category">
@@ -14,6 +17,7 @@
     // Desc
     <string name="content_desc_add_item">Add new item</string>
     <string name="content_desc_save_item">Save item</string>
+    <string name="content_desc_empty_db">No Data</string>
 
     // Hint
     <string name="hint_task_name">Task name</string>
