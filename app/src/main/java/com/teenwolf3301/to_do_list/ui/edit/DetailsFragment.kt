@@ -31,8 +31,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentDetailsBinding.bind(view)
-        val categories = resources.getStringArray(R.array.category)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, categories)
 
         binding.apply {
             etTaskName.setText(viewModel.taskName)
@@ -45,10 +43,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             tvDateCreated.isVisible = viewModel.task != null
             tvDateCreated.text =
                 resources.getString(R.string.date_created, viewModel.task?.formattedDate)
-            dropdownText.setAdapter(arrayAdapter)
-            if (categories.contains(viewModel.taskCategory)) {
-                dropdownText.setText(viewModel.taskCategory, false)
-            }
 
             etTaskName.addTextChangedListener {
                 viewModel.taskName = it.toString()
@@ -68,6 +62,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
             fabApply.setOnClickListener {
                 viewModel.onSaveClick()
+            }
+        }
+
+        viewModel.categoriesUserList.observe(viewLifecycleOwner) {
+            val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, viewModel.addDefaultList(it))
+            binding.dropdownText.apply {
+                setAdapter(arrayAdapter)
+                setText(viewModel.taskCategory, false)
             }
         }
 

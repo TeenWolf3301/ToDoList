@@ -2,11 +2,14 @@ package com.teenwolf3301.to_do_list.ui.edit
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.teenwolf3301.to_do_list.R
 import com.teenwolf3301.to_do_list.data.Priority
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.data.TaskDao
 import com.teenwolf3301.to_do_list.util.ADD_ITEM_RESULT_OK
+import com.teenwolf3301.to_do_list.util.APP_ACTIVITY
 import com.teenwolf3301.to_do_list.util.DELETE_ITEM_RESULT_OK
 import com.teenwolf3301.to_do_list.util.UPDATE_ITEM_RESULT_OK
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +25,8 @@ class DetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val detailsEventChannel = Channel<DetailsEvent>()
+    private val categoriesDefaultList: Array<String> = APP_ACTIVITY.resources.getStringArray(R.array.category)
+    val categoriesUserList = taskDao.getTasksCategories().asLiveData()
 
     val detailsChannel = detailsEventChannel.receiveAsFlow()
     val task = state.get<Task>("task")
@@ -69,6 +74,14 @@ class DetailsViewModel @Inject constructor(
 
     fun onDeleteClick() {
         if (task != null) deleteTask(task)
+    }
+
+    fun addDefaultList(list: List<String>): List<String> {
+        val fullList = list.distinct().toMutableList()
+        categoriesDefaultList.forEach {
+            if (!fullList.contains(it)) fullList.add(it)
+        }
+        return fullList.toList()
     }
 
     private fun addNewTask(task: Task) = viewModelScope.launch {
