@@ -22,6 +22,9 @@ interface TaskDao {
     @Query("SELECT * FROM table_todo WHERE (isCompleted != :hideCompleted OR isCompleted = 0) AND name LIKE '%' || :searchQuery || '%' ORDER BY isCompleted ASC, CASE priority WHEN 'HIGH' THEN 1 WHEN 'MEDIUM' THEN 2 WHEN 'LOW' THEN 3 END")
     fun getTasksSortedByPriority(searchQuery: String, hideCompleted: Boolean): Flow<List<Task>>
 
+    @Query("SELECT category FROM table_todo")
+    fun getTasksCategories(): Flow<List<String>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTask(task: Task)
 
