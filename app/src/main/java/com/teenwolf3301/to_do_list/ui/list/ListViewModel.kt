@@ -2,7 +2,7 @@ package com.teenwolf3301.to_do_list.ui.list
 
 import androidx.lifecycle.*
 import com.teenwolf3301.to_do_list.data.PreferencesRepository
-import com.teenwolf3301.to_do_list.data.SortOrder
+import com.teenwolf3301.to_do_list.data.PreferencesRepository.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.data.TaskDao
 import com.teenwolf3301.to_do_list.util.ADD_ITEM_RESULT_OK
@@ -23,11 +23,10 @@ class ListViewModel @Inject constructor(
     state: SavedStateHandle
 ) : ViewModel() {
 
-    val searchQuery = state.getLiveData("searchQuery", "")
-
-    val preferencesFlow = preferencesRepository.preferencesFlow
-
     private val listEventChannel = Channel<ListEvent>()
+
+    val searchQuery = state.getLiveData("searchQuery", "")
+    val preferencesFlow = preferencesRepository.preferencesFlow
     val listEvent = listEventChannel.receiveAsFlow()
 
     private val taskFlow = combine(
@@ -40,15 +39,10 @@ class ListViewModel @Inject constructor(
     }
 
     val list = taskFlow.asLiveData()
-
     val emptyDatabase = MutableLiveData(true)
 
     fun onEmptyDatabase(list: List<Task>) {
         emptyDatabase.value = list.isEmpty()
-    }
-
-    fun onTaskSelected(task: Task) = viewModelScope.launch {
-        listEventChannel.send(ListEvent.NavigateToEditItemScreen(task))
     }
 
     fun onTaskCheckedChanged(task: Task, isChecked: Boolean) = viewModelScope.launch {
@@ -63,8 +57,8 @@ class ListViewModel @Inject constructor(
         preferencesRepository.updateHideCompleted(hideCompleted)
     }
 
-    fun onAddNewItemClick() = viewModelScope.launch {
-        listEventChannel.send(ListEvent.NavigateToAddItemScreen)
+    fun onUndoDeleteClick(task: Task) = viewModelScope.launch {
+        taskDao.insertTask(task)
     }
 
     fun onDetailsResult(result: Int, task: Task? = null) {
@@ -78,8 +72,12 @@ class ListViewModel @Inject constructor(
         }
     }
 
-    fun onUndoDeleteClick(task: Task) = viewModelScope.launch {
-        taskDao.insertTask(task)
+    fun onAddNewItemClick() = viewModelScope.launch {
+        listEventChannel.send(ListEvent.NavigateToAddItemScreen)
+    }
+
+    fun onTaskSelected(task: Task) = viewModelScope.launch {
+        listEventChannel.send(ListEvent.NavigateToEditItemScreen(task))
     }
 
     private fun showConfirmMessage(text: String) = viewModelScope.launch {

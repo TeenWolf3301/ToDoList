@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.teenwolf3301.to_do_list.R
-import com.teenwolf3301.to_do_list.data.SortOrder
+import com.teenwolf3301.to_do_list.data.PreferencesRepository.SortOrder
 import com.teenwolf3301.to_do_list.data.Task
 import com.teenwolf3301.to_do_list.databinding.FragmentListBinding
 import com.teenwolf3301.to_do_list.ui.list.ListViewModel.ListEvent.*

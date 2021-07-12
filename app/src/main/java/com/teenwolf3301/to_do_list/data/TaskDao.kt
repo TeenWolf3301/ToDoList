@@ -1,6 +1,7 @@
 package com.teenwolf3301.to_do_list.data
 
 import androidx.room.*
+import com.teenwolf3301.to_do_list.data.PreferencesRepository.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao

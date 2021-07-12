@@ -1,6 +1,6 @@
 <resources>
     // App
-    <string name="app_name">To-Do List</string>
+    <string name="app_name">DoList</string>
     <string name="stats">%1$s, %2$s.</string>
     <string name="statsCompleted">%1$d Completed</string>
     <string name="statsUncompleted">%1$d Uncompleted</string>

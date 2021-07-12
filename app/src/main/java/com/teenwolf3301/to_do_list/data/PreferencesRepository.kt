@@ -14,10 +14,6 @@ import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-enum class SortOrder { BY_NAME, BY_DATE, BY_PRIORITY }
-
-data class FilterPreferences(val sortOrder: SortOrder, val hideCompleted: Boolean)
-
 @Singleton
 class PreferencesRepository @Inject constructor(@ApplicationContext context: Context) {
 
@@ -55,4 +51,8 @@ class PreferencesRepository @Inject constructor(@ApplicationContext context: Con
         val SORT_ORDER = stringPreferencesKey("sort_order")
         val HIDE_COMPLETED = booleanPreferencesKey("hide_completed")
     }
+
+    enum class SortOrder { BY_NAME, BY_DATE, BY_PRIORITY }
+
+    data class FilterPreferences(val sortOrder: SortOrder, val hideCompleted: Boolean)
 }
